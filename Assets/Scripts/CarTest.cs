@@ -12,6 +12,7 @@ public class CarTest : MonoBehaviour
     public float maxSpeed = 50f;
     public float reverseSpeed;
     public Vector3 currentVelocity;
+    public float rpmCap = 1000;
 
     public Rigidbody rb;
 
@@ -42,17 +43,8 @@ public class CarTest : MonoBehaviour
 
     
 
-        currentSpeed = Mathf.Clamp(transform.InverseTransformDirection(rb.velocity).z, reverseSpeed, maxSpeed);
-        rb.velocity = transform.TransformDirection(new Vector3(0, 0, currentSpeed));
- currentVelocity = rb.velocity;
-       // if (currentSpeed > maxSpeed && currentSpeed >=0)
-        //{
 
 
-        //if (currentSpeed < reverseSpeed)
-        //{
-         //   rb.velocity = transform.TransformDirection(new Vector3(0, 0, reverseSpeed));
-        //}
     
     }
     
@@ -64,7 +56,12 @@ public class CarTest : MonoBehaviour
 
             wheelColliders[0].steerAngle = steerAngle;
             wheelColliders[1].steerAngle = steerAngle;
-        
+
+
+                currentSpeed = Mathf.Clamp(transform.InverseTransformDirection(rb.velocity).z, reverseSpeed, maxSpeed);
+ //       rb.velocity = transform.TransformDirection(new Vector3(0, 0, currentSpeed));
+ //       //rb.AddForce(new Vector3 (0,0,))
+ //currentVelocity = rb.velocity;
 
         // Throttle and braking
         float motorTorque = maxMotorTorque * throttleInput;
@@ -78,7 +75,15 @@ public class CarTest : MonoBehaviour
             else
             {
                 wheel.brakeTorque = 0;
-                wheel.motorTorque = motorTorque;
+                if (Mathf.Abs(wheel.rpm) > rpmCap)
+                {
+                    wheel.motorTorque = 0;
+                }
+                else
+                {
+                   wheel.motorTorque = motorTorque;
+                }
+
             }
         }
 
