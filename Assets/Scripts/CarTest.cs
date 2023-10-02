@@ -40,12 +40,6 @@ public class CarTest : MonoBehaviour
         steeringInput = Input.GetAxis("Horizontal");
         throttleInput = Input.GetAxis("Vertical");
         brakeInput = Input.GetKey(KeyCode.Space) ? 1f : 0f;
-
-    
-
-
-
-    
     }
     
 
@@ -58,12 +52,8 @@ public class CarTest : MonoBehaviour
             wheelColliders[1].steerAngle = steerAngle;
 
 
-                currentSpeed = Mathf.Clamp(transform.InverseTransformDirection(rb.velocity).z, reverseSpeed, maxSpeed);
- //       rb.velocity = transform.TransformDirection(new Vector3(0, 0, currentSpeed));
- //       //rb.AddForce(new Vector3 (0,0,))
- //currentVelocity = rb.velocity;
+                currentSpeed = Mathf.Clamp(transform.InverseTransformDirection(rb.velocity).z, maxSpeed, reverseSpeed);
 
-        // Throttle and braking
         float motorTorque = maxMotorTorque * throttleInput;
         foreach (var wheel in wheelColliders)
         {
@@ -86,8 +76,6 @@ public class CarTest : MonoBehaviour
 
             }
         }
-
-        // Update wheel rotations for visuals
         UpdateWheelTransforms();
     }
 
