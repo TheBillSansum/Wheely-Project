@@ -13,13 +13,17 @@ public class CarTest : MonoBehaviour
     public float reverseSpeed;
     public Vector3 currentVelocity;
     public float rpmCap = 1000;
+    public GameObject groundCheck;
 
     public Rigidbody rb;
 
+    public bool grounded;
     public float currentSpeed;
     public float steeringInput;
     public float throttleInput;
     public float brakeInput;
+
+    public TrailRenderer[] wheelMarks;
 
     private void Start()
     {
@@ -89,5 +93,25 @@ public class CarTest : MonoBehaviour
             wheelTransforms[i].rotation = rot;
             wheelTransforms[i].position = pos;
         }
+    }
+
+    private void OnTriggerStay(Collider groundCheck)
+    {
+        grounded = true;
+        updateWheelMarks();
+    }
+
+    private void OnTriggerExit(Collider groundCheck)
+    {
+        grounded = false;
+        updateWheelMarks();
+    }
+
+    public void updateWheelMarks()
+    {
+        wheelMarks[0].emitting = grounded;
+        wheelMarks[1].emitting = grounded;
+        wheelMarks[2].emitting = grounded;
+        wheelMarks[3].emitting = grounded;
     }
 }
