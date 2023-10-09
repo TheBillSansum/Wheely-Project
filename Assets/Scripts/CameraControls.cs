@@ -32,7 +32,7 @@ public class CameraControls : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            currentCameraPos = 1;
+            currentCameraPos = 2;
             UpdateCamera();
         }
     }
@@ -49,13 +49,13 @@ public class CameraControls : MonoBehaviour
             case 1:
                 virtualCamera.SetActive(false);
                 mainCamera.transform.position = cameraTransform[1].transform.position;
-                mainCamera.transform.rotation = Quaternion.Euler(30, 0, 0);
+                mainCamera.transform.localRotation = Quaternion.Euler(30, -180, 0);
                 break;
 
             case 2:
                 virtualCamera.SetActive(false);
                 mainCamera.transform.position = cameraTransform[2].transform.position;
-                mainCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
+                mainCamera.transform.localRotation = Quaternion.Euler(0, -180, 0);
                 break;
 
 
