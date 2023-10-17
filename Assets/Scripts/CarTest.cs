@@ -27,7 +27,8 @@ public class CarTest : MonoBehaviour
     public float checkRate = 1.0f; 
     public bool grounded = false;
     public LayerMask groundLayer;
-    public float heightOffset = 0.25f; 
+    public float heightOffset = 0.25f;
+    public ConstantForce gravity;
 
 
     public TrailRenderer[] wheelMarks;
@@ -46,7 +47,10 @@ public class CarTest : MonoBehaviour
             }
         }
 
-        InvokeRepeating("GroundCheck", 0, checkRate);
+        gravity = gameObject.AddComponent<ConstantForce>();
+        gravity.force = new Vector3(0.0f, -3f, 0.0f);
+
+        //InvokeRepeating("GroundCheck", 0, checkRate);
     }
 
     private void Update()
