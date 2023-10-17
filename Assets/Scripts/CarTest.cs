@@ -16,6 +16,7 @@ public class CarTest : MonoBehaviour
 
 
     public Rigidbody rb;
+    public float flipStrength = 1f;
 
 
     public float currentSpeed;
@@ -24,7 +25,7 @@ public class CarTest : MonoBehaviour
     public float brakeInput;
 
     public float groundedHeight = 0.5f;
-    public float checkRate = 1.0f; 
+    public float checkRate = 1.0f;
     public bool grounded = false;
     public LayerMask groundLayer;
     public float heightOffset = 0.25f;
@@ -34,6 +35,8 @@ public class CarTest : MonoBehaviour
     public TrailRenderer[] wheelMarks;
     public GameObject[] breakLight;
     public Material breaklightMaterial;
+
+    public GameObject[] wheelPrefab;
 
     private void Start()
     {
@@ -48,7 +51,7 @@ public class CarTest : MonoBehaviour
         }
 
         gravity = gameObject.AddComponent<ConstantForce>();
-        gravity.force = new Vector3(0.0f, -3f, 0.0f);
+        gravity.force = new Vector3(0.0f, -2f, 0.0f);
 
         //InvokeRepeating("GroundCheck", 0, checkRate);
     }
@@ -60,12 +63,12 @@ public class CarTest : MonoBehaviour
         throttleInput = Input.GetAxis("Vertical");
         brakeInput = Input.GetKey(KeyCode.Space) ? 1f : 0f;
 
-        if(throttleInput > 0)
+        if (throttleInput > 0)
         {
             breakLight[0].SetActive(true);
             breakLight[1].SetActive(true);
             breaklightMaterial.SetFloat("_Metallic", 1);
-           
+
         }
         else
         {
@@ -73,19 +76,35 @@ public class CarTest : MonoBehaviour
             breakLight[1].SetActive(false);
             breaklightMaterial.SetFloat("_Metallic", 0);
         }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            ResetCarLeft();
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            ResetCarRight();
+        }
     }
-    
+
 
     private void FixedUpdate()
     {
-        // Steering
+        //if (grounded)
+        //{
+        //    this.rb.freezeRotation = true;
+        //}
+        //else
+        //{
+        //    this.rb.freezeRotation = false;
+        //}
         float steerAngle = maxSteerAngle * steeringInput;
 
-            wheelColliders[0].steerAngle = steerAngle;
-            wheelColliders[1].steerAngle = steerAngle;
+        wheelColliders[0].steerAngle = steerAngle;
+        wheelColliders[1].steerAngle = steerAngle;
 
 
-                currentSpeed = Mathf.Clamp(transform.InverseTransformDirection(rb.velocity).z, maxSpeed, reverseSpeed);
+        currentSpeed = Mathf.Clamp(transform.InverseTransformDirection(rb.velocity).z, maxSpeed, reverseSpeed);
 
         float motorTorque = maxMotorTorque * throttleInput;
         foreach (var wheel in wheelColliders)
@@ -104,7 +123,7 @@ public class CarTest : MonoBehaviour
                 }
                 else
                 {
-                   wheel.motorTorque = motorTorque;
+                    wheel.motorTorque = motorTorque;
                 }
 
             }
@@ -144,5 +163,20 @@ public class CarTest : MonoBehaviour
         wheelMarks[1].emitting = grounded;
         wheelMarks[2].emitting = grounded;
         wheelMarks[3].emitting = grounded;
+    }
+
+    public void ResetCarLeft()
+    {
+        if (Mathf.Abs(transform.localRotation.eulerAngles.z) > 90f)
+        {
+            rb.AddRelativeTorque(0f, 0f, flipStrength, ForceMode.Acceleration);
+        }
+    }
+    public void ResetCarRight()
+    {
+        if (Mathf.Abs(transform.localRotation.eulerAngles.z) > 90f)
+        {
+            rb.AddRelativeTorque(0f, 0f, -flipStrength, ForceMode.Acceleration);
+        }
     }
 }
