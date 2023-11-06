@@ -16,7 +16,7 @@ public class CarTest : MonoBehaviour
 
 
     public Rigidbody rb;
-    public float flipStrength = 1f;
+    public float flipStrength = 3f;
 
 
     public float currentSpeed;
@@ -35,6 +35,8 @@ public class CarTest : MonoBehaviour
     public TrailRenderer[] wheelMarks;
     public GameObject[] breakLight;
     public Material breaklightMaterial;
+    public GameObject[] frontLights;
+    public bool lightsOn = false;
 
     public GameObject[] wheelPrefab;
 
@@ -84,6 +86,21 @@ public class CarTest : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             ResetCarRight();
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (lightsOn)
+            {
+                lightsOn = false;
+                frontLights[0].SetActive(false);
+                frontLights[1].SetActive(false);
+            }
+            else
+            {
+                lightsOn = true;
+                frontLights[0].SetActive(true);
+                frontLights[1].SetActive(true);
+            }
         }
     }
 
