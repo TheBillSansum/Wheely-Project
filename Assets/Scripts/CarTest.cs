@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CarTest : MonoBehaviour
 {
+    #region Variables
+
     public WheelCollider[] wheelColliders;
     public Transform[] wheelTransforms;
     public float maxSteerAngle = 30f;
@@ -13,6 +15,8 @@ public class CarTest : MonoBehaviour
     public float reverseSpeed;
     public Vector3 currentVelocity;
     public float rpmCap = 1000;
+
+    public AudioManager audioManager;
 
 
     public Rigidbody rb;
@@ -39,6 +43,8 @@ public class CarTest : MonoBehaviour
     public bool lightsOn = false;
 
     public GameObject[] wheelPrefab;
+
+    #endregion
 
     private void Start()
     {
@@ -89,6 +95,8 @@ public class CarTest : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            audioManager.PlayHint(2);
+            
             if (lightsOn)
             {
                 lightsOn = false;
@@ -107,21 +115,13 @@ public class CarTest : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (grounded)
-        //{
-        //    this.rb.freezeRotation = true;
-        //}
-        //else
-        //{
-        //    this.rb.freezeRotation = false;
-        //}
         float steerAngle = maxSteerAngle * steeringInput;
 
         wheelColliders[0].steerAngle = steerAngle;
         wheelColliders[1].steerAngle = steerAngle;
 
 
-        currentSpeed = Mathf.Clamp(transform.InverseTransformDirection(rb.velocity).z, maxSpeed, reverseSpeed);
+        currentSpeed = Mathf.Clamp(transform.InverseTransformDirection(rb.velocity).z, maxSpeed, reverseSpeed); // Not the issue ^
 
         float motorTorque = maxMotorTorque * throttleInput;
         foreach (var wheel in wheelColliders)
@@ -148,6 +148,9 @@ public class CarTest : MonoBehaviour
         UpdateWheelTransforms();
     }
 
+    /// <summary>
+    /// PROBLEM CHILD :<
+    /// </summary>
     void UpdateWheelTransforms()
     {
         for (int i = 0; i < wheelTransforms.Length; i++)
@@ -156,9 +159,10 @@ public class CarTest : MonoBehaviour
             Vector3 pos;
             wheelColliders[i].GetWorldPose(out pos, out rot);
             wheelTransforms[i].rotation = rot;
-            wheelTransforms[i].position = pos;
+            //wheelTransforms[i].position = pos;
         }
     }
+
     void GroundCheck()
     {
         if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z), Vector3.down, groundedHeight + heightOffset, groundLayer))

@@ -19,22 +19,22 @@ public class WheelScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z), Vector3.down, groundedHeight + heightOffset, groundLayer))
+    //void Update()
+    //{
+    //    if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z), Vector3.down, groundedHeight + heightOffset, groundLayer))
             
-        {
-            //Debug.DrawRay(hit);
-     //       Debug.DrawLine(new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z), Vector3.down, groundedHeight + heightOffset, groundLayer))
-            grounded = true;
-            wheelMarks.emitting = grounded;
-            carScript.grounded = true;
-        }
-        else
-        {
-            grounded = false;
-            wheelMarks.emitting = grounded;
-            carScript.grounded = false;
-        }
-    }
+    //    {
+    //        //Debug.DrawRay(hit);
+    // //       Debug.DrawLine(new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z), Vector3.down, groundedHeight + heightOffset, groundLayer))
+    //        grounded = true;
+    //        wheelMarks.emitting = grounded;
+    //        carScript.grounded = true;
+    //    }
+    //    else
+    //    {
+    //        grounded = false;
+    //        wheelMarks.emitting = grounded;
+    //        carScript.grounded = false;
+    //    }
+    //}
 }
