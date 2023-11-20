@@ -4,13 +4,30 @@ using UnityEngine;
 
 public class FlippedCheck : MonoBehaviour
 {
-   public AudioManager audioManager;
+    public AudioManager audioManager;
+    private Coroutine waitCoroutine;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ground"))
+        if (other.CompareTag("Ground") && waitCoroutine == null)
         {
-            audioManager.PlayHint(4);
+            waitCoroutine = StartCoroutine(PlaySoundAfterDelay(3));
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Ground") && waitCoroutine != null)
+        {
+            StopCoroutine(waitCoroutine);
+            waitCoroutine = null;
+        }
+    }
+
+    private IEnumerator PlaySoundAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        audioManager.PlayHint(4);
+        waitCoroutine = null;
     }
 }
