@@ -10,7 +10,9 @@ public class Boost : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<Rigidbody>().AddForce(boost, 0, 0);
-        Debug.Log(other);
+        if (other.GetComponent<CarTest>() != null)
+            other.gameObject.GetComponent<Rigidbody>().AddForce(boost, 0, 0);
+            Debug.Log(other);
+        } 
     }
-}
+

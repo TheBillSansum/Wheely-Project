@@ -19,9 +19,9 @@ public class WheelScript : MonoBehaviour
     }
     void Update()
     {
-        //Vector3 rayStart = new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z);
-        //Vector3 rayEnd = rayStart - Vector3.up * (groundedHeight + heightOffset);
-        //Debug.DrawLine(rayStart, rayEnd, Color.red);
+        Vector3 rayStart = new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z);
+        Vector3 rayEnd = rayStart - Vector3.up * (groundedHeight + heightOffset);
+        Debug.DrawLine(rayStart, rayEnd, Color.red);
 
         if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z), Vector3.down, groundedHeight + heightOffset, groundLayer))
 

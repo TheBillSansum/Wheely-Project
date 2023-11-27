@@ -5,11 +5,12 @@ using UnityEngine;
 public class ChairTriggewr : MonoBehaviour
 {
     public GameObject chairObject;
+    public Rigidbody chairObjectRB;
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            chairObject.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            chairObjectRB.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 
@@ -17,7 +18,7 @@ public class ChairTriggewr : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            chairObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            chairObjectRB.constraints = RigidbodyConstraints.None;
         }
     }
 }

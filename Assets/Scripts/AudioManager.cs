@@ -20,7 +20,6 @@ public class AudioManager : MonoBehaviour
     public string[] lines;
     public float typingSpeed = 0.0005f;
 
-    //public CinemachineVirtualCamera cinemachineCamera;
     public CinemachineFreeLook cinemachineCamera;
     public Transform[] hintTransform;
     public Transform originalLookAt;
