@@ -48,8 +48,10 @@ public class AudioManager : MonoBehaviour
     {
         if (DamageClip.Length > 0)
         {
+            ResetTime();
             int randomIndex = Random.Range(0, DamageClip.Length);
             AudioClip clip = DamageClip[randomIndex];
+            Debug.Log("Playing damage clip: " + clip.name);
             EnqueueAudio(clip, false);
         }
     }
@@ -78,7 +80,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-           audioQueue.Enqueue(clip);
+            audioSource.PlayOneShot(clip);
         }
     }
 
