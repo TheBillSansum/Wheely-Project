@@ -6437,6 +6437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3085395784818609381}
+  - component: {fileID: 5575691293647483229}
   m_Layer: 0
   m_Name: _Wheel (1)
   m_TagString: Untagged
@@ -6483,6 +6484,26 @@ Transform:
   - {fileID: 3085395785924335295}
   m_Father: {fileID: 433736863412850863}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5575691293647483229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3085395784818609380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c69005959ea49449bedb78d6791d3b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grounded: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  heightOffset: 0.1
+  wheelMarks: {fileID: 0}
+  groundedHeight: 0.1
+  carScript: {fileID: 0}
 --- !u!1 &3085395784820229997
 GameObject:
   m_ObjectHideFlags: 0
@@ -8522,6 +8543,7 @@ MonoBehaviour:
   wheelMarks: {fileID: 9026019677352536917, guid: 103a5a7f6f7501345bbf13d2c44b7a2d,
     type: 3}
   groundedHeight: 0.5
+  carScript: {fileID: 0}
 --- !u!1 &3085395785607100407
 GameObject:
   m_ObjectHideFlags: 0

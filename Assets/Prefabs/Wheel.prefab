@@ -228,6 +228,7 @@ MonoBehaviour:
   heightOffset: 0.25
   wheelMarks: {fileID: 7210481616762261272}
   groundedHeight: 0.5
+  carScript: {fileID: 0}
 --- !u!1001 &1824551314761311309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -254,27 +255,27 @@ PrefabInstance:
     - target: {fileID: 4790451327361672197, guid: 103a5a7f6f7501345bbf13d2c44b7a2d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4790451327361672197, guid: 103a5a7f6f7501345bbf13d2c44b7a2d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4790451327361672197, guid: 103a5a7f6f7501345bbf13d2c44b7a2d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4790451327361672197, guid: 103a5a7f6f7501345bbf13d2c44b7a2d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4790451327361672197, guid: 103a5a7f6f7501345bbf13d2c44b7a2d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4790451327361672197, guid: 103a5a7f6f7501345bbf13d2c44b7a2d,
         type: 3}
