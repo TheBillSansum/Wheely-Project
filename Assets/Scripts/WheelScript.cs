@@ -29,12 +29,13 @@ public class WheelScript : MonoBehaviour
             grounded = true;
             wheelMarks.emitting = grounded;
             carScript.grounded = true;
+
         }
         else
         {
             grounded = false;
             wheelMarks.emitting = grounded;
             carScript.grounded = false;
-        }
+        }    
     }
 }
