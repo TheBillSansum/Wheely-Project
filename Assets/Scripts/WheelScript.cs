@@ -12,23 +12,21 @@ public class WheelScript : MonoBehaviour
     public float groundedHeight = -0.1f;
 
     public CarTest carScript;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+
     void Update()
     {
         Vector3 rayStart = new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z);
         Vector3 rayEnd = rayStart - Vector3.up * (groundedHeight + heightOffset);
         Debug.DrawLine(rayStart, rayEnd, Color.red);
 
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z), Vector3.down, groundedHeight + heightOffset, groundLayer))
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + heightOffset, transform.position.z), Vector3.down, out RaycastHit hit,groundedHeight + heightOffset, groundLayer))
 
         {
             grounded = true;
             wheelMarks.emitting = grounded;
             carScript.grounded = true;
+            Debug.Log(hit.collider.gameObject.name);
 
         }
         else
