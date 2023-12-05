@@ -13,5 +13,11 @@ public class HintTrigger : MonoBehaviour
         {
             audioManager.PlayHint(hintNumber);
         }
+
+        if (other.CompareTag("Domino"))
+        {
+            audioManager.PlayHint(hintNumber);
+            Time.timeScale = 1;
+        }
     }
 }

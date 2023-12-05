@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Hitchable
+  - Domino
+  - Chair
   layers:
   - Default
   - TransparentFX

@@ -33,20 +33,20 @@ public class DamageTracker : MonoBehaviour
     public void Update()
     {
         CarImage.value = DamageTaken / 100f;
+        if (DamageTaken >= 50)
+        {
+            DamageTaken -= (Time.deltaTime / 5);
+        }
 
         if (coolDown >= 0)
         {
             coolDown -= Time.deltaTime;
-        }
-    }
-
-    public void HitWall()
-    {
-        DamageTaken += 10;
+        }     
+        
         percentage = DamageTaken;
 
         percentage = Mathf.Clamp(percentage, 0f, 100f);
-        PercentageText.text = percentage.ToString() + "%";
+        PercentageText.text = percentage.ToString("0") + "%";
         float alpha = percentage / 100f;
 
         Color newColor = new Color(1f, 0.2235f, 0.2235f, alpha);
@@ -54,5 +54,11 @@ public class DamageTracker : MonoBehaviour
         {
             image.color = newColor;
         }
+    }
+
+    public void HitWall()
+    {
+        DamageTaken += 10;
+
     }
 }
