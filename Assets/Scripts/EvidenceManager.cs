@@ -20,4 +20,15 @@ public class EvidenceManager : MonoBehaviour
         UIEvidenceScribble[evidenceNumber].SetActive(true);
     }
 
+    public void DisplayHint()
+    {
+        foreach (EvidenceInstance evidenceInstance in evidenceObject)
+        {
+            if (!evidenceInstance.destroyed)
+            {
+                evidenceInstance.EnableHintHighlight();
+            }
+        }
+    }
+
 }

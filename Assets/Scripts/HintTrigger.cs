@@ -12,6 +12,7 @@ public class HintTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             audioManager.PlayHint(hintNumber);
+            Debug.Log(other.gameObject.name);
         }
 
         if (other.CompareTag("Domino"))
